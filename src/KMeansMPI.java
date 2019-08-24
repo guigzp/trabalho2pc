@@ -93,6 +93,8 @@ public class KMeansMPI {
                     }
                 }
 
+
+
                 for(int i = 1; i < Main.qtdThread; i++){
                     for(int j = 0; j < 20; j++){
                         MPI.COMM_WORLD.Send(testeAgoravai[j], 0, this.centroides.get(0).getCoordenadas().size(), MPI.INT, i, 0);
@@ -138,13 +140,8 @@ public class KMeansMPI {
                 for(Centroide c : this.centroides) {
                     if(c.moveCentroide()) {
                         moveu = true;
-                        break;
                     }
                 }
-//                for(int i = 0; i < 20; i++){
-//                    System.out.println(this.centroides.get(i).getElementos().size());
-//                }
-//                System.out.println("abcate");
                 int [] aux = new int[1];
                 aux[0] =  moveu? 1 : 0;
                 MPI.COMM_WORLD.Send(aux,0,1,MPI.INT, 1,0 );

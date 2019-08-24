@@ -1,7 +1,7 @@
 Base: 59
 Execução: Sequencial
 Iterações: 249
-Tempo de Execução: 15929 ms
+Tempo de Execução: 16078 ms
 id=0, classe=19
 id=1, classe=16
 id=2, classe=14

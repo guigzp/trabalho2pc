@@ -1,8 +1,8 @@
 Base: 59
 Execução: Paralelo 
 Quantidade Threads: 4
-Iterações: 21
-Tempo de Execução: 5173 ms
+Iterações: 249
+Tempo de Execução: 57089 ms
 id=0, classe=0
 id=1, classe=0
 id=2, classe=0
