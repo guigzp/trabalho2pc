@@ -1,5 +1,5 @@
-.idea/
-bases/
-out/
+.idea
+bases
+out
 saida.txt
 K-Means-MPI.iml
