@@ -63,26 +63,13 @@ public class KMeansMPI {
         int inicio = qtdElementosThread * (Main.nrThread -1);
         int fim = inicio + qtdElementosThread -1;
 
-        if(Main.nrThread != 0){
-            System.out.println("THread: " + Main.nrThread + " Inicio: " + inicio + " FIm: " + fim);
-        }
-
 //        if(Main.nrThread == (this.quantidadeThreads - 1)) {
 //            fim = inicio + (qtdElementosThread - 1) + qtdElementos % this.quantidadeThreads;
 //        } else {
 //            fim = inicio + qtdElementosThread - 1;
 //        }
 
-        Integer [][] testeCentroide = new Integer[20][this.centroides.get(0).getCoordenadas().size()];
-        for(int i =0; i< 20; i++){
-            testeCentroide[i] = this.centroides.get(i).getCoordenadas().toArray(testeCentroide[i]);
-        }
-        int [][] testeAgoravai = new int[20][this.centroides.get(0).getCoordenadas().size()];
-        for(int i =0; i < 20; i++){
-            for(int j = 0; j < this.centroides.get(0).getCoordenadas().size(); j++){
-                testeAgoravai[i][j] = (int) testeCentroide[i][j];
-            }
-        }
+
 
         do{
             incrementaIteracaoes();
@@ -92,7 +79,20 @@ public class KMeansMPI {
             }
             moveu = false;
 
+            int [][] centroidesMatriz = new int[20][this.centroides.get(0).getCoordenadas().size()];
+
             if(Main.nrThread == 0) {
+                Integer [][] testeCentroide = new Integer[20][this.centroides.get(0).getCoordenadas().size()];
+                for(int i =0; i< 20; i++){
+                    testeCentroide[i] = this.centroides.get(i).getCoordenadas().toArray(testeCentroide[i]);
+                }
+                int [][] testeAgoravai = new int[20][this.centroides.get(0).getCoordenadas().size()];
+                for(int i =0; i < 20; i++){
+                    for(int j = 0; j < this.centroides.get(0).getCoordenadas().size(); j++){
+                        testeAgoravai[i][j] = (int) testeCentroide[i][j];
+                    }
+                }
+
                 for(int i = 1; i < Main.qtdThread; i++){
                     for(int j = 0; j < 20; j++){
                         MPI.COMM_WORLD.Send(testeAgoravai[j], 0, this.centroides.get(0).getCoordenadas().size(), MPI.INT, i, 0);
@@ -100,15 +100,15 @@ public class KMeansMPI {
                 }
             } else {
                 for(int i =0; i < 20; i++){
-                    MPI.COMM_WORLD.Recv(testeAgoravai[i], 0, this.centroides.get(0).getCoordenadas().size(), MPI.INT, 0, 0);
+                    MPI.COMM_WORLD.Recv(centroidesMatriz[i], 0, this.centroides.get(0).getCoordenadas().size(), MPI.INT, 0, 0);
                 }
             }
             MPI.COMM_WORLD.Barrier();
             if(Main.nrThread != 0){
                 for(int i = 0; i < 20; i ++){
                     ArrayList<Integer> aux = new ArrayList<>();
-                    for(int j =0; j < testeAgoravai[i].length; j++){
-                        aux.add(testeAgoravai[i][j]);
+                    for(int j =0; j < centroidesMatriz[i].length; j++){
+                        aux.add(centroidesMatriz[i][j]);
                     }
                     this.centroides.get(i).setCoordenadas(aux);
                 }
@@ -141,6 +141,10 @@ public class KMeansMPI {
                         break;
                     }
                 }
+//                for(int i = 0; i < 20; i++){
+//                    System.out.println(this.centroides.get(i).getElementos().size());
+//                }
+//                System.out.println("abcate");
                 int [] aux = new int[1];
                 aux[0] =  moveu? 1 : 0;
                 MPI.COMM_WORLD.Send(aux,0,1,MPI.INT, 1,0 );
