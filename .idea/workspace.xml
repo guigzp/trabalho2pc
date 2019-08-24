@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7eefad8-f836-4a76-a436-ed60cc1e3eda" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K-Means-MPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/K-Means-MPI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/K-Means-MPI/Centroide.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/K-Means-MPI/Centroide.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/K-Means-MPI/KMeansMPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/K-Means-MPI/KMeansMPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Centroide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Centroide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saida.txt" beforeDir="false" afterPath="$PROJECT_DIR$/saida.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/KMeansMPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KMeansMPI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/KMeansMPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+            <state relative-caret-position="17">
+              <caret line="128" column="48" lean-forward="true" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -121,7 +117,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="K-Means-MPI" />
-      <option name="VM_PARAMETERS" value="-jar ${MPJ_HOME}\lib\starter.jar Main -np 4 1" />
+      <option name="VM_PARAMETERS" value="-jar ${MPJ_HOME}\lib\starter.jar Main -np 4 5" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -142,8 +138,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.1482602" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -217,8 +212,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/KMeansMPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+        <state relative-caret-position="17">
+          <caret line="128" column="48" lean-forward="true" selection-start-line="128" selection-start-column="48" selection-end-line="128" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

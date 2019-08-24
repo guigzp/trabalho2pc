@@ -63,6 +63,10 @@ public class KMeansMPI {
         int inicio = qtdElementosThread * (Main.nrThread -1);
         int fim = inicio + qtdElementosThread -1;
 
+        if(Main.nrThread != 0){
+            System.out.println("THread: " + Main.nrThread + " Inicio: " + inicio + " FIm: " + fim);
+        }
+
 //        if(Main.nrThread == (this.quantidadeThreads - 1)) {
 //            fim = inicio + (qtdElementosThread - 1) + qtdElementos % this.quantidadeThreads;
 //        } else {
@@ -108,7 +112,7 @@ public class KMeansMPI {
                     }
                     this.centroides.get(i).setCoordenadas(aux);
                 }
-                for(int i = inicio; i < fim; i++){
+                for(int i = inicio; i <= fim; i++){
                     int [] aux = new int[1];
                     aux[0] = i;
                     MPI.COMM_WORLD.Send(aux, 0, 1, MPI.INT, 0, 0);
@@ -120,7 +124,7 @@ public class KMeansMPI {
                 int [] aux  = new int[1];
                 int numeroElemento, melhorCentroide;
                 for(int i =1; i < quantidadeThreads; i++){
-                    for(int j = 0; j < qtdElementosThread - 1; j++){
+                    for(int j = 0; j < qtdElementosThread; j++){
                         MPI.COMM_WORLD.Recv(aux, 0,1,MPI.INT,i,0);
                         numeroElemento = aux[0];
                         MPI.COMM_WORLD.Recv(aux, 0,1,MPI.INT,i,1);
@@ -150,9 +154,12 @@ public class KMeansMPI {
             MPI.COMM_WORLD.Barrier();
         } while(moveu);
         if(Main.nrThread == 0){
+            int soma = 0;
             for(int i = 0; i < 20; i++){
                 System.out.println(this.centroides.get(i).getElementos().size());
+                soma += this.centroides.get(i).getElementos().size();
             }
+            System.out.println("Soma: " + soma);
         }
     }
 }
