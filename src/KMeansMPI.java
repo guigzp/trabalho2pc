@@ -47,15 +47,17 @@ public class KMeansMPI {
     public void executa() {
         Boolean moveu;
         int qtdElementos = this.elementos.size();
-        int qtdElementosThread = qtdElementos / (this.quantidadeThreads - 1);
-        int inicio = qtdElementosThread * (Main.nrThread - 1);
+        int qtdElementosThread = qtdElementos / this.quantidadeThreads ;
+        int inicio = qtdElementosThread * Main.nrThread ;
         int fim;
 
         if(Main.nrThread == (this.quantidadeThreads - 1)) {
-            fim = inicio + (qtdElementosThread - 1) + qtdElementos % (this.quantidadeThreads - 1);
+            fim = inicio + (qtdElementosThread - 1) + qtdElementos % this.quantidadeThreads ;
         } else {
             fim = inicio + qtdElementosThread - 1;
         }
+
+        System.out.println("Thread: " + Main.nrThread + " Inicio: " + inicio + " Fim: " + fim);
 
         do{
             incrementaIteracaoes();
@@ -113,6 +115,12 @@ public class KMeansMPI {
             } else {
                 int [] aux  = new int[1];
                 int numeroElemento, melhorCentroide;
+
+                for(int i = inicio; i <= fim; i++){
+                    Elemento e = this.elementos.get(i);
+                    this.centroides.get(melhorCentroide(e)).addElemento(e);
+                }
+
                 for(int i = 1; i < quantidadeThreads; i++) {
                     if(i != quantidadeThreads - 1) {
                         for(int j = 0; j < qtdElementosThread; j++) {
@@ -123,7 +131,7 @@ public class KMeansMPI {
                             this.centroides.get(melhorCentroide).addElemento(this.elementos.get(numeroElemento));
                         }
                     } else {
-                        for(int j = 0; j < qtdElementosThread + (qtdElementos % (this.quantidadeThreads - 1)); j++) {
+                        for(int j = 0; j < qtdElementosThread + (qtdElementos % this.quantidadeThreads); j++) {
                             MPI.COMM_WORLD.Recv(aux, 0, 1, MPI.INT, i, 0);
                             numeroElemento = aux[0];
                             MPI.COMM_WORLD.Recv(aux, 0, 1, MPI.INT, i, 1);
