@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Centroide {
     private ArrayList<Integer> coordenadas = new ArrayList<>();
@@ -29,10 +28,6 @@ public class Centroide {
         return elementos;
     }
 
-    public void setElementos(ArrayList<Elemento> elementos) {
-        this.elementos = elementos;
-    }
-
     public Boolean moveCentroide() {
         int qtdCoordenadas = this.coordenadas.size();
         ArrayList<Integer> aux = new ArrayList<>();
@@ -52,5 +47,4 @@ public class Centroide {
             return true;
         }
     }
-
 }

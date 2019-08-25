@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Elemento {
-    private ArrayList<Integer> coordenadas = new ArrayList<>();
+    private ArrayList<Integer> coordenadas;
     private int indiceCentroide;
 
     public int getIndiceCentroide() {

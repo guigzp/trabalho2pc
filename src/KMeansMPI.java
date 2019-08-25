@@ -1,10 +1,6 @@
 import mpi.MPI;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class KMeansMPI {
     private ArrayList<Centroide> centroides;
@@ -24,14 +20,6 @@ public class KMeansMPI {
         this.centroides = (ArrayList) centroides.clone();
         this.elementos = (ArrayList) elementos.clone();
         this.quantidadeThreads = quantidadeThreads;
-    }
-
-    public ArrayList<Centroide> getCentroides() {
-        return centroides;
-    }
-
-    public ArrayList<Elemento> getElementos() {
-        return elementos;
     }
 
     public int calculaDistancia(Elemento e, Centroide c) {
@@ -56,7 +44,7 @@ public class KMeansMPI {
         return this.centroides.indexOf(melhor);
     }
 
-    public void executa() throws InterruptedException {
+    public void executa() {
         Boolean moveu;
         int qtdElementos = this.elementos.size();
         int qtdElementosThread = qtdElementos / (this.quantidadeThreads - 1);
@@ -90,7 +78,7 @@ public class KMeansMPI {
 
                 for(int i = 0; i < 20; i++) {
                     for(int j = 0; j < this.centroides.get(0).getCoordenadas().size(); j++) {
-                        testeAgoravai[i][j] = (int) testeCentroide[i][j];
+                        testeAgoravai[i][j] = testeCentroide[i][j];
                     }
                 }
 
@@ -148,22 +136,20 @@ public class KMeansMPI {
 
             MPI.COMM_WORLD.Barrier();
 
+            int [] seMoveu = new int[1];
             if(Main.nrThread == 0) {
-                for(Centroide c : this.centroides) {
-                    if(c.moveCentroide()) {
+                for (Centroide c : this.centroides) {
+                    if (c.moveCentroide()) {
                         moveu = true;
                     }
                 }
-                int [] aux = new int[1];
-                aux[0] =  moveu ? 1 : 0;
-                for(int i = 1; i < this.quantidadeThreads; i++) {
-                    MPI.COMM_WORLD.Send(aux, 0, 1, MPI.INT, i, 0);
-                }
-            } else {
-                int [] aux = new int[1];
-                MPI.COMM_WORLD.Recv(aux, 0, 1, MPI.INT, 0, 0);
-                moveu = aux[0] == 1;
+
+                seMoveu[0] = moveu ? 1 : 0;
             }
+
+            MPI.COMM_WORLD.Bcast(seMoveu, 0, 1, MPI.INT, 0);
+
+            moveu = seMoveu[0] == 1;
 
             MPI.COMM_WORLD.Barrier();
 

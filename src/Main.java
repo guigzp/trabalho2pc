@@ -66,12 +66,12 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) {
         MPI.Init(args);
         qtdThread = MPI.COMM_WORLD.Size();
         nrThread = MPI.COMM_WORLD.Rank();
         String nomeArquivoCentroide, nomeArquivoBase;
-        switch (Integer.parseInt(args[3])){
+        switch (Integer.parseInt(args[3])) {
             case 2:
                 nomeArquivoBase = "bases/int_base_161.data";
                 nomeArquivoCentroide = "bases/int_centroid_161_20.data";
