@@ -56,9 +56,6 @@ public class KMeansMPI {
         } else {
             fim = inicio + qtdElementosThread - 1;
         }
-
-        System.out.println("Thread: " + Main.nrThread + " Inicio: " + inicio + " Fim: " + fim);
-
         do{
             incrementaIteracaoes();
 
@@ -162,14 +159,5 @@ public class KMeansMPI {
             MPI.COMM_WORLD.Barrier();
 
         } while(moveu);
-
-        if(Main.nrThread == 0) {
-            int soma = 0;
-            for(int i = 0; i < 20; i++) {
-                System.out.println(this.centroides.get(i).getElementos().size());
-                soma += this.centroides.get(i).getElementos().size();
-            }
-            System.out.println("Soma: " + soma);
-        }
     }
 }

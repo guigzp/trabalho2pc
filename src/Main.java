@@ -112,7 +112,20 @@ public class Main {
             kmeans.executa();
             tempoFinal = System.currentTimeMillis();
             tempo = tempoFinal - tempoInicial;
-            escreveSaida(elementos, tempo, kmeans.getIteracoes(), 2, qtdThread);
+            if(nrThread == 0){
+                for(Elemento e : elementos){
+                    int cont = 0;
+                    for(Centroide c : centroides){
+                        if(c.getElementos().contains(e)){
+                            e.setIndiceCentroide(cont);
+                            break;
+                        }
+                        cont ++;
+                    }
+                }
+                escreveSaida(elementos, tempo, kmeans.getIteracoes(), 2, qtdThread);
+            }
+
         }
 
         MPI.Finalize();
